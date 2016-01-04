@@ -54,4 +54,13 @@ RSpec.describe ContactsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #show' do
+    it 'assigns the requested contact to @contact' do
+      contact = Fabricate(:contact)
+
+      get :show, id: contact
+      expect(assigns(:contact)).to eq contact
+    end
+  end
 end
