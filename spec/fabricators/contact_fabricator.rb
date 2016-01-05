@@ -1,5 +1,6 @@
 Fabricator(:contact) do
   email "jhonlocke@gmail.com"
+  user
 end
 
 Fabricator(:contact_with_company, from: :contact) do
@@ -11,6 +12,7 @@ Fabricator(:contact_custom_fields, from: :contact) do
 end
 
 Fabricator(:contact_invalid, class_name: Contact) do
+  user
   name "Jhon Locke"
   email nil
 end

@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update]
 
   def index
-    @contacts = Contact.all
+    @contacts = current_user.contacts
   end
 
   def new
@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    
+    @contact.user_id = current_user.id
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
@@ -40,24 +40,23 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @contact = Contact.find(params[:id])
-    @custom_fields =  CustomField.where(contact_id: @contact.id)
+    set_custom_fields
   end
 
   private
 
   def contact_params
-    params.require(:contact).permit(:name, :email).tap do |whitelist|
+    params.require(:contact).permit(:name, :email, :user_id).tap do |whitelist|
       whitelist[:contact_fields] = params[:contact][:contact_fields]
     end
   end
 
  def set_contact
-   @contact = Contact.find(params[:id])
+   @contact = current_user.contacts.find(params[:id])
  end
 
  def set_custom_fields
-   @custom_fields =  CustomField.all.select(:name, :field_type, :combo_options)
+   @custom_fields =  current_user.custom_fields
  end
 
 end

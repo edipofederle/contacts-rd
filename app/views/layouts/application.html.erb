@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= current_user.email %> - <%= link_to "sair", destroy_user_session_path, method: :delete %>
+<%= current_user.email %> - <%= link_to "sair", destroy_user_session_path, method: :delete %><br/><br/>
 
 <%= yield %>
 

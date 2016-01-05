@@ -4,7 +4,13 @@ RSpec.describe ContactsController, type: :controller do
 
   login_user
 
-  let(:contact) { Fabricate(:contact) }
+  other_user = Fabricate(:user_locke)
+
+  let(:contact)      { Fabricate(:contact, user: subject.current_user) }
+  let(:custom_field) { Fabricate(:custom_field, user: subject.current_user) }
+
+  Fabricate(:contact,     user: other_user)
+  Fabricate(:custom_field, user: other_user)
 
   describe 'GET #index' do
     it 'populates an array of contacts' do
@@ -21,10 +27,11 @@ RSpec.describe ContactsController, type: :controller do
   end
 
   describe 'GET #new' do
-    it 'assigns new contactt' do
+    it 'assigns new contact and custom_fields' do
       get :new
 
       expect(assigns(:contact)).to be_kind_of(Contact)
+      expect(assigns(:custom_fields)).to eq [custom_field]
     end
 
     it 'renders the :new view' do
@@ -42,6 +49,12 @@ RSpec.describe ContactsController, type: :controller do
         expect {
           post :create, contact: contact_attributes
         }.to change(Contact, :count).by(1)
+      end
+
+      it 'belongs to current_user' do
+        post :create, contact: contact_attributes
+
+        expect(Contact.last.user).to eq subject.current_user
       end
 
       it 'create a new contact with custom fields' do
@@ -82,10 +95,11 @@ RSpec.describe ContactsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    it 'assigns the requested contact to @contact' do
+    it 'assigns the requested contact and custom_fields' do
       get :edit, id: contact
 
       expect(assigns(:contact)).to eq contact
+      expect(assigns(:custom_fields)).to eq [custom_field]
     end
 
     it 'renders the :edit view' do
@@ -128,7 +142,7 @@ RSpec.describe ContactsController, type: :controller do
       it 'assigns the contact custom fields to custom_fields' do
         put :update, id: contact, contact: Fabricate.attributes_for(:contact, email: nil)
 
-        expect(assigns(:custom_fields)).to_not be nil
+        expect(assigns(:custom_fields)).to eq [custom_field]
       end
     end
   end
@@ -139,6 +153,7 @@ RSpec.describe ContactsController, type: :controller do
       get :show, id: contact
 
       expect(assigns(:contact)).to eq contact
+      expect(assigns(:custom_fields)).to eq [custom_field]
     end
   end
 end

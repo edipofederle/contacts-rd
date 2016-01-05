@@ -1,7 +1,7 @@
 Name: <%= @contact.name %><br/>
 Email: <%= @contact.email %><br/>
 
-<% CustomField.all.each do |field|  %>
+<% @custom_fields.all.each do |field|  %>
     <%= field.name %>: <%= field_content(@contact, field)  %><br/>
 <% end  %>
 

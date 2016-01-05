@@ -4,7 +4,10 @@ RSpec.describe CustomFieldsController, type: :controller do
 
   login_user
 
-  let!(:custom_field) { Fabricate(:custom_field) }
+  other_user = Fabricate(:user_locke)
+  Fabricate(:custom_field, user: other_user)
+
+  let!(:custom_field) { Fabricate(:custom_field, user: subject.current_user) }
 
   describe 'GET #index' do
     it 'populates an array of custom fields' do
@@ -42,6 +45,12 @@ RSpec.describe CustomFieldsController, type: :controller do
         expect {
           post :create, custom_field: custom_field_attributes
         }.to change(CustomField, :count).by(1)
+      end
+
+      it 'belongs to current_user' do
+        post :create, custom_field: custom_field_attributes
+
+        expect(CustomField.last.user).to eq subject.current_user
       end
 
       it 'redirects to the :index view' do
