@@ -18,6 +18,7 @@ class ContactsController < ApplicationController
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
       else
+        set_custom_fields
         format.html { render :new }
       end
     end
@@ -32,6 +33,7 @@ class ContactsController < ApplicationController
       if @contact.update(contact_params)
         format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
       else
+        set_custom_fields
         format.html { render :edit }
       end
     end
@@ -52,6 +54,10 @@ class ContactsController < ApplicationController
 
  def set_contact
    @contact = Contact.find(params[:id])
+ end
+
+ def set_custom_fields
+   @custom_fields =  CustomField.all.select(:name, :field_type)
  end
 
 end

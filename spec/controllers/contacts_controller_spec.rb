@@ -66,6 +66,11 @@ RSpec.describe ContactsController, type: :controller do
         }.to_not change(Contact, :count)
       end
 
+      it 'assigns the contact custom fields to custom_fields' do
+        post :create, contact: contact_invalid_attributes
+        expect(assigns(:custom_fields)).to_not be nil
+      end
+
       it 're-renders the new action' do
         post :create, contact: contact_invalid_attributes
 
@@ -116,6 +121,12 @@ RSpec.describe ContactsController, type: :controller do
         
         contact.reload
         expect(contact.email).to eq "jhonlocke@gmail.com"
+      end
+
+      it 'assigns the contact custom fields to custom_fields' do
+        put :update, id: contact, contact: Fabricate.attributes_for(:contact, email: nil)
+
+        expect(assigns(:custom_fields)).to_not be nil
       end
     end
   end
