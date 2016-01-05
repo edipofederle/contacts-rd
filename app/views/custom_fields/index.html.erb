@@ -1,3 +1,11 @@
 <% @fields.each do |field|%>
-<%= field.name %> - <%= field.field_type %>
+    Field Name: <%= field.name %><br/>
+    <% if field.field_type == "combo_box"%>
+        Field Type: <%= field.field_type %><br/>
+        ComboBox options: <%= field.combo_options %>
+    <% else %>
+        Field Type: <%= field.field_type %>
+    <% end %>
+    <hr/>
 <% end %>
+

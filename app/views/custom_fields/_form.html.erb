@@ -6,7 +6,12 @@
 
     <div class="field">
         <%= f.label :field_type %>
-        <%= f.select :field_type, %w[text_field text_area] %>
+        <%= f.select :field_type, %w[text_field text_area combo_box] %>
+
+        <div class="combo-option" style="display: none">
+            <%= f.label "Type combo box option separated by comma"%>
+            <%= f.text_field :combo_options%>
+        </div>
     </div
     <br/><br/>
 

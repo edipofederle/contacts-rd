@@ -21,5 +21,6 @@ group :development, :test do
   gem 'guard-rails', require: false
   gem 'rb-fsevent' if `uname` =~ /Darwin/
   gem 'simplecov', :require => false
+  gem 'database_cleaner'
 end
 

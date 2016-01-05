@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
 
   def new
     @contact       = Contact.new
-    @custom_fields =  CustomField.all.select(:name, :field_type)
+    set_custom_fields
   end
 
   def create
@@ -25,7 +25,7 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    @custom_fields =  CustomField.all.select(:name, :field_type)
+    set_custom_fields
   end
 
   def update
@@ -57,7 +57,7 @@ class ContactsController < ApplicationController
  end
 
  def set_custom_fields
-   @custom_fields =  CustomField.all.select(:name, :field_type)
+   @custom_fields =  CustomField.all.select(:name, :field_type, :combo_options)
  end
 
 end

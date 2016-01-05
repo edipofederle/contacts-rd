@@ -23,7 +23,7 @@ class CustomFieldsController < ApplicationController
 
   private
   def custom_field_params
-    params.require(:custom_field).permit(:name, :field_type)
+    params.require(:custom_field).permit(:name, :field_type, :combo_options)
   end
 
 end
