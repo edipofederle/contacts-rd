@@ -4,6 +4,7 @@ RSpec.describe Contact, type: :model do
 
   it { should validate_presence_of(:email) }
   it { should serialize(:contact_fields) }
+  it { should belong_to(:user) }
 
   it 'an contact with custom fields' do
     contact_with_custom_fields = Fabricate(:contact_custom_fields)
