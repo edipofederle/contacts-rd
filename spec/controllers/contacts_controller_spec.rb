@@ -1,16 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe ContactsController, type: :controller do
+
+  let(:contact) { Fabricate(:contact) }
+
   describe 'GET #index' do
     it 'populates an array of contacts' do
-      contact = Fabricate(:contact)
-
       get :index
+
       expect(assigns(:contacts)).to eq ([contact])
     end
 
     it 'renders the :index view' do
       get :index
+
       expect(response).to render_template(:index)
     end
   end
@@ -18,6 +21,7 @@ RSpec.describe ContactsController, type: :controller do
   describe 'GET #new' do
     it 'assigns new contactt' do
       get :new
+
       expect(assigns(:contact)).to be_kind_of(Contact)
     end
   end
@@ -55,11 +59,57 @@ RSpec.describe ContactsController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do
+    it 'assigns the requested contact to @contact' do
+      get :edit, id: contact
+
+      expect(assigns(:contact)).to eq contact
+    end
+
+    it 'renders the :edit view' do
+      get :edit, id: contact
+
+      expect(response).to render_template(:edit)
+    end
+  end
+
+  describe 'PUT #update' do
+    context 'valid attributes' do
+      it 'located the requested @contact' do
+        put :update, id: contact, contact: Fabricate.attributes_for(:contact)
+
+        expect(assigns(:contact)).to eq contact
+      end
+
+      it 'changes contact attributes' do
+        put :update, id: contact, contact: Fabricate.attributes_for(:contact, name: "Maria")
+        contact.reload
+
+        expect(contact.name).to eq "Maria"
+      end
+
+      it 'redirects to the updated contact' do
+        put :update, id: contact, contact: Fabricate.attributes_for(:contact)
+
+        expect(response).to redirect_to contact
+      end
+    end
+
+    context 'invalid attributes' do 
+      it 'not change contact attributes' do
+        put :update, id: contact, contact: Fabricate.attributes_for(:contact, email: nil)
+        
+        contact.reload
+        expect(contact.email).to eq "jhonlocke@gmail.com"
+      end
+    end
+  end
+
+
   describe 'GET #show' do
     it 'assigns the requested contact to @contact' do
-      contact = Fabricate(:contact)
-
       get :show, id: contact
+
       expect(assigns(:contact)).to eq contact
     end
   end
