@@ -15,4 +15,16 @@ RSpec.describe CustomField, type: :model do
      expect(custom_field.select_options).to eq nil
    }
  end
+
+ describe '#remove' do
+   it {
+     custom_field_company       = Fabricate(:custom_field)
+     contact_with_custom_fields = Fabricate(:contact_with_company)
+
+     expect{
+       custom_field_company.remove}.to change(CustomField,:count).by(-1)
+     expect(Contact.last.contact_fields).to be_empty
+     
+   }
+ end
 end

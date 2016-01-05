@@ -13,4 +13,13 @@ RSpec.describe Contact, type: :model do
     expect(contact.age).to eq 35
   end
 
+  describe '#remove_custom_field' do
+    it {
+      contact_with_custom_fields = Fabricate(:contact_custom_fields)
+      contact_with_custom_fields.remove_custom_field(:age)
+      
+      expect(contact_with_custom_fields.contact_fields).to_not include(:age)
+    }
+  end
+
 end

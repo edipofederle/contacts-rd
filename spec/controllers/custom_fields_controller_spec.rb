@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CustomFieldsController, type: :controller do
 
-  let(:custom_field) { Fabricate(:custom_field) }
+  let!(:custom_field) { Fabricate(:custom_field) }
 
   describe 'GET #index' do
     it 'populates an array of custom fields' do
@@ -63,6 +63,14 @@ RSpec.describe CustomFieldsController, type: :controller do
 
         expect(response).to render_template(:new)
       end
+    end
+  end
+
+  describe 'DELETE destory' do
+    it 'deletes the custom_field' do
+      expect {
+        delete :destroy, id: custom_field
+      }.to change(CustomField, :count).by(-1)
     end
   end
 

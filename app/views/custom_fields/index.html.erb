@@ -6,6 +6,7 @@
     <% else %>
         Field Type: <%= field.field_type %>
     <% end %>
+    <%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %>
     <hr/>
 <% end %>
 
