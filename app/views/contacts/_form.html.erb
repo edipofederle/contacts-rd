@@ -1,34 +1,25 @@
-<%= form_for(@contact) do |f| %>
-    <% if @contact.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+<div class="ui form">
+    <%= form_for(@contact) do |f| %>
+        
+        <%= render partial: "shared/validations", locals: {record: @contact} %>
 
-            <ul>
-                <% @contact.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-            </ul>
+        <div class="field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name %>
         </div>
-    <% end %>
 
-    <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-    </div>
+        <div class="field">
+            <%= f.label :email %><br>
+            <%= f.text_field :email %>
+        </div>
 
-    <div class="field">
-        <%= f.label :email %><br>
-        <%= f.text_field :email %>
-    </div>
-
-    <%= f.fields_for :contact_fields, OpenStruct.new(@contact.contact_fields) do |builder| %>
-        <% @custom_fields.each do |field| %>
-            <%= render "contacts/fields/#{field.field_type}", field: field, f: builder  %>
-        <% end  %>
-    <% end %>
-    
-    <div class="actions">
-        <%= f.submit %>
-    </div>
-
-<% end %>
+        <%= f.fields_for :contact_fields, OpenStruct.new(@contact.contact_fields) do |builder| %>
+            <% @custom_fields.each do |field| %>
+                <%= render "contacts/fields/#{field.field_type}", field: field, f: builder  %>
+            <% end  %>
+        <% end %>
+        
+        <%= f.submit class: "ui primary button" %> 
+        <%= link_to "Back", :root, class: "ui button" %>
+    <%end %>
+</div>

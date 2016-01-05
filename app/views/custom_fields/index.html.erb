@@ -1,12 +1,23 @@
-<% @fields.each do |field|%>
-    Field Name: <%= field.name %><br/>
-    <% if field.field_type == "combo_box"%>
-        Field Type: <%= field.field_type %><br/>
-        ComboBox options: <%= field.combo_options %>
-    <% else %>
-        Field Type: <%= field.field_type %>
-    <% end %>
-    <%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <hr/>
-<% end %>
+<table class="ui table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Other</td>
+            <td>Options</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @fields.each do |field|%>
+            <tr>
+                <td><%= field.name %></td>
+                <td><%= field.field_type %></td>
+                <td><%= field.combo_options %></td>
+                <td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>        
+    </tbody>
+</table>
 
+
+<%= link_to "Back to Contacts", :root, class: "ui button" %>

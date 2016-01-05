@@ -12,4 +12,31 @@
  *
  *= require_tree .
  *= require_self
+
  */
+
+@import "semantic-ui";
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+html, body{
+  height:100%;
+}
+
+.container {
+  height: 100%;
+}
+
+.main-content {
+    padding: 20px;
+    background: #FFF;
+}
+
+#error_explanation ul {
+  padding-left: 50px;
+}

@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require semantic-ui/transition
+//= require semantic-ui/dropdown
+
+
+$(document).ready(function(){
+  $('.ui.dropdown').dropdown();
+});
+

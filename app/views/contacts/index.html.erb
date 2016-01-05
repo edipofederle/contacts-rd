@@ -1,12 +1,27 @@
-<h1># Contacts</h1>
+<h1>My  Contacts</h1>
 
-<% @contacts.each do |contact| %>
-    <%= link_to contact.email, contact %>
-    <%= link_to 'Edit', edit_contact_path(contact) %>
+<table class="ui table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>E-mail</td>
+            <td>Options</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @contacts.each do |contact| %>
+            <tr>
+                <td><%= link_to contact.name, contact %></td>
+                <td><%= link_to contact.email, contact %></td>
+                <td><%= link_to "Edit", edit_contact_path(contact) %> or <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end  %>
+    </tbody>
+</table>
+
+
 <br/>
-<% end %>
 
-<br/>
+<%= link_to 'New Contact', new_contact_path, class: "ui button" %> or
 
-<%= link_to 'New Contact', new_contact_path %><br/>
-<%= link_to 'Add new Custom Field', new_custom_field_path  %>
+<%= link_to 'Add new Custom Field', new_custom_field_path, class: "ui button"  %>
