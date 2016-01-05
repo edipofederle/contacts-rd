@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe CustomFieldsController, type: :controller do
 
+  login_user
+
   let!(:custom_field) { Fabricate(:custom_field) }
 
   describe 'GET #index' do

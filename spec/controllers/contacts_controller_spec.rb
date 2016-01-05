@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ContactsController, type: :controller do
 
+  login_user
+
   let(:contact) { Fabricate(:contact) }
 
   describe 'GET #index' do
