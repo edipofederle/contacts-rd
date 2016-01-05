@@ -20,5 +20,6 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-rails', require: false
   gem 'rb-fsevent' if `uname` =~ /Darwin/
+  gem 'simplecov', :require => false
 end
 
