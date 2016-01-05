@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe CustomField, type: :model do
  it { should validate_presence_of(:name) }
  it { should validate_presence_of(:field_type) }
+ it { should belong_to(:user) }
 
  describe '#select_options' do
    it 'returns a array contains the combobox options' do

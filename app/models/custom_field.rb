@@ -1,6 +1,8 @@
 class CustomField < ActiveRecord::Base
   validates :name, :field_type, presence: true
 
+  belongs_to :user
+
   def select_options
     return if self.field_type != "combo_box"
     self.combo_options.split(',').map(&:strip)
@@ -17,7 +19,6 @@ class CustomField < ActiveRecord::Base
      contact.save!
    end
 
-   self.destroy!
-
+   self.destroy
   end
 end
