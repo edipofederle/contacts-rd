@@ -1,4 +1,9 @@
-<%= @contact.email %>
+Name: <%= @contact.name %><br/>
+Email: <%= @contact.email %><br/>
+
+<% @contact.contact_fields.each do |propertie|  %>
+    <%= propertie[0] %>: <%= propertie[1]  %><br/>
+<% end  %>
 
 <br/>
 

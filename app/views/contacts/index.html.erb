@@ -1,7 +1,9 @@
 <h1># Contacts</h1>
 
 <% @contacts.each do |contact| %>
-    <%= link_to contact.email, contact %><br/>
+    <%= link_to contact.email, contact %>
+    <%= link_to 'Edit', edit_contact_path(contact) %>
+<br/>
 <% end %>
 
 <br/>

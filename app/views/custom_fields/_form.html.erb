@@ -1,0 +1,14 @@
+<%= form_for @custom_field do |f| %>
+    <div class="field">
+        <%= f.label :name %> 
+        <%= f.text_field :name%>
+    </div><br/>
+
+    <div class="field">
+        <%= f.label :field_type %>
+        <%= f.select :field_type, %w[text_field text_area] %>
+    </div
+    <br/><br/>
+
+    <%= f.submit %>
+<% end %>
