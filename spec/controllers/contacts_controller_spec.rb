@@ -36,6 +36,15 @@ RSpec.describe ContactsController, type: :controller do
         }.to change(Contact, :count).by(1)
       end
 
+      it 'create a new contact with custom fields' do
+        contact_custom_attributes = Fabricate.attributes_for(:contact_custom_fields)
+        
+        expect {
+          post :create, contact: contact_custom_attributes
+        }.to change(Contact, :count).by(1)
+
+      end
+
       it 'redirects to the new contact' do
         post :create, contact: contact_attributes
         expect(response).to redirect_to Contact.last
