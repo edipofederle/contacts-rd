@@ -24,6 +24,12 @@ RSpec.describe ContactsController, type: :controller do
 
       expect(assigns(:contact)).to be_kind_of(Contact)
     end
+
+    it 'renders the :new view' do
+      get :new
+      
+      expect(response).to render_template(:new)
+    end
   end
 
   describe 'POST #create' do

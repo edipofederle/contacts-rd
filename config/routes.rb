@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   root 'contacts#index'
-  resources :contacts
+  resources :contacts, :custom_fields
 end
