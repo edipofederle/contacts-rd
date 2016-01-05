@@ -1,12 +1,16 @@
 require 'simplecov'
 require 'devise'
 require 'support/controller_macros'
+require 'features/support/session_helpers'
+
 
 SimpleCov.start 'rails'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    config.include Features::SessionHelpers, type: :feature
+    config.include Features::Helpers, type: :feature
   end
 
   config.include Devise::TestHelpers, :type => :controller
@@ -16,15 +20,28 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
+  RSpec.configure do |config|
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
+    config.before(:suite) do
+      DatabaseCleaner.clean_with(:truncation)
     end
+
+    config.before(:each) do
+      DatabaseCleaner.strategy = :transaction
+    end
+
+    config.before(:each, :js => true) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
+
   end
 
 end

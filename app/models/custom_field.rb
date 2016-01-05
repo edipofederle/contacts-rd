@@ -1,4 +1,7 @@
 class CustomField < ActiveRecord::Base
+
+  before_save { |field| field.name = field.name.downcase }
+
   validates :name, :field_type, presence: true
 
   belongs_to :user
