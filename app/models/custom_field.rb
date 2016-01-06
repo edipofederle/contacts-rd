@@ -13,6 +13,10 @@ class CustomField < ActiveRecord::Base
     self.combo_options.split(',').map(&:strip)
   end
 
+  # When a CustomField is removed
+  # we need also remove this field 
+  # of contacts that use it
+  #
   def remove
    contacts_that_use_this_field = 
      Contact.all.select {
