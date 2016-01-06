@@ -1,28 +1,31 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+=== How to run locally
 
-* Ruby version
+Clone this repository:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+``git clone git@github.com:edipofederle/contacts-rd.git``
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+This project use postgres as database. So make sure that you have it installed and running.
+
+Create the database and execute the migrations:
+ 
+``cd contacts-rd``
+``bundle exec rake db:create && bundle exec rake db:migrate``
+
+Running:
+
+``rails s``
+
+Point you browser to ``localhost:3000``
+
+
+=== Tests
+
+In order to run all tests you can execute:
+
+``bundle exec rake spec``
+
+Some tests are integration test using Capybara. So make sure that you have Firefox installed in your machine
