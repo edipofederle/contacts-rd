@@ -27,7 +27,7 @@ class CustomFieldsController < ApplicationController
     @custom_field.remove
 
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Custom Field was successfully destroyed.' }
+      format.html { redirect_to custom_fields_url, notice: 'Custom Field was successfully destroyed.' }
     end
   end
 
