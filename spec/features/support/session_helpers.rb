@@ -25,5 +25,10 @@ module Features
         combo_options: field_spec[:options]
       )
     end
+
+    def given_an_contact_with_custom_field(user)
+      Fabricate(:custom_field, user: user)
+      Fabricate(:contact_with_company, user: user)
+    end
   end
 end

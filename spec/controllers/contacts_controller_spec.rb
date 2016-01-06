@@ -6,7 +6,7 @@ RSpec.describe ContactsController, type: :controller do
 
   other_user = Fabricate(:user_locke)
 
-  let(:contact)      { Fabricate(:contact, user: subject.current_user) }
+  let!(:contact)      { Fabricate(:contact, user: subject.current_user) }
   let(:custom_field) { Fabricate(:custom_field, user: subject.current_user) }
 
   Fabricate(:contact,     user: other_user)
@@ -147,13 +147,20 @@ RSpec.describe ContactsController, type: :controller do
     end
   end
 
-
   describe 'GET #show' do
     it 'assigns the requested contact to @contact' do
       get :show, id: contact
 
       expect(assigns(:contact)).to eq contact
       expect(assigns(:custom_fields)).to eq [custom_field]
+    end
+  end
+
+  describe 'DELETE destory' do
+    it 'deletes the contact' do
+      expect {
+        delete :destroy, id: contact
+      }.to change(Contact, :count).by(-1)
     end
   end
 end

@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
 
-  before_action :set_contact, only: [:show, :edit, :update]
+  before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   def index
     @contacts = current_user.contacts
@@ -41,6 +41,14 @@ class ContactsController < ApplicationController
 
   def show
     set_custom_fields
+  end
+
+  def destroy
+    @contact.destroy
+
+    respond_to do |format|
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+    end
   end
 
   private
