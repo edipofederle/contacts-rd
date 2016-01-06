@@ -21,7 +21,7 @@ group :development, :test do
   gem 'shoulda-matchers',  require: false
   gem 'guard-rspec'
   gem 'guard-rails', require: false
-  gem 'rb-fsevent' if `uname` =~ /Darwin/
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'simplecov', :require => false
   gem 'database_cleaner'
   gem 'capybara'

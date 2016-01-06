@@ -12,3 +12,8 @@ test: &test
   encoding: utf8
   database: contacts-rb-test
   pool: 5
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
