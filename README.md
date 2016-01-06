@@ -1,7 +1,7 @@
-== README
+## README
 
 
-=== How to run locally
+### How to run locally
 
 Clone this repository:
 
@@ -22,7 +22,7 @@ Running:
 Point you browser to ``localhost:3000``
 
 
-=== Tests
+### Tests
 
 In order to run all tests you can execute:
 
