@@ -10,6 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'faker'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
