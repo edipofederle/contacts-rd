@@ -13,6 +13,7 @@ This project use postgres as database. So make sure that you have it installed a
 Create the database and execute the migrations:
  
 ``cd contacts-rd``
+
 ``bundle exec rake db:create && bundle exec rake db:migrate``
 
 Running:
