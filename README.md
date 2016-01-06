@@ -20,7 +20,7 @@ Running:
 
 ``rails s``
 
-Point you browser to ``localhost:3000``
+Point your browser to ``localhost:3000``
 
 
 ### Tests
