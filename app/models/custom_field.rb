@@ -1,5 +1,7 @@
 class CustomField < ActiveRecord::Base
 
+  FIELDS = %w[text_field text_area combo_box]
+
   before_save { |field| field.name = field.name.downcase }
 
   validates :name, :field_type, presence: true

@@ -10,16 +10,19 @@
 
         <div class="field">
             <%= f.label :field_type %>
-            <%= f.select(:field_type, %w[text_field text_area combo_box], {}, {class: "ui fluid dropdown"}) %>
+            <%= f.select(:field_type, CustomField::FIELDS, {}, {class: "ui fluid dropdown"}) %>
 
-            <div class="combo-option" style="display: none">
-                <%= f.label "Type combo box options separated by comma"%>
-                <%= f.text_field :combo_options%>
+            <div class="combo-option" style="display: none"><br/>
+                <div class="field">
+                    <%= f.label :combo_options %>
+                    <%= f.text_field :combo_options%>
+                </div>
+                <small>Use a comma to separate the options</small>
             </div>
         </div
         <br/><br/>
 
-        <%= f.submit class: "ui primary button " %>
+        <%= f.submit "Create Custom Field", class: "ui primary button " %>
         <%= link_to "Back", :custom_fields, class: "ui button" %>
         <%= link_to "Back to Contacts", :root, class: "ui button" %>
     <% end %>
