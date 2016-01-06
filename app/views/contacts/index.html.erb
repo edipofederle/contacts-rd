@@ -1,25 +1,38 @@
 <h1>My  Contacts</h1>
 
-<table class="ui table">
-    <thead>
-        <tr>
-            <td>Name</td>
-            <td>E-mail</td>
-            <td>Options</td>
-        </tr>
-    </thead>
-    <tbody>
-        <% @contacts.each do |contact| %>
+<% if @contacts.empty?  %>
+    <div class="ui info message">
+
+        <div class="header">
+            Do you don't have any contacts yet
+        </div>
+        <ul class="list">
+            <li>Create a new one clicking in 'New Contact'</li>
+            <li>Create a new custom field for your contact form clicking in 'Custom Fields'</li>
+        </ul>
+    </div>
+<% else  %>
+
+    <table class="ui table">
+        <thead>
             <tr>
-                <td><%= link_to contact.name, contact %></td>
-                <td><%= link_to contact.email, contact %></td>
-                <td><%= link_to "Edit", edit_contact_path(contact) %> or <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td>Name</td>
+                <td>E-mail</td>
+                <td>Options</td>
             </tr>
-        <% end  %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% @contacts.each do |contact| %>
+                <tr>
+                    <td><%= link_to contact.name, contact %></td>
+                    <td><%= link_to contact.email, contact %></td>
+                    <td><%= link_to "Edit", edit_contact_path(contact) %> or <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+            <% end  %>
+        </tbody>
+    </table>
 
-
+<% end %>
 <br/>
 
 <%= link_to 'New Contact', new_contact_path, class: "primary ui button" %> or

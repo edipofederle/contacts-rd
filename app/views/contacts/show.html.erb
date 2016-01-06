@@ -1,9 +1,12 @@
-Name: <%= @contact.name %><br/>
-Email: <%= @contact.email %><br/>
+<h1 class="ui header"><%= @contact.email %></h1>
+
+<b><label>Name:</label></b> <%= @contact.name %><br/>
+<b><label>Email:</label></b> <%= @contact.email %><br/>
 
 <% @custom_fields.all.each do |field|  %>
-    <%= field.name %>: <%= field_content(@contact, field)  %><br/>
+    <b><label><%= field.name %>:<label></b> <%= field_content(@contact, field)  %><br/>
 <% end  %>
 
 <br/>
 <%= link_to "Back", :contacts, class: "ui button" %>
+
